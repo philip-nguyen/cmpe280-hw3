@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <h1>Health Camp SPA</h1>
+            <nav>
+                <ol>
+                    <li class="crumb"><a href="#">Demographics</a></li>
+                    <li class="crumb"><a href="#">Health Vitals</a></li>
+                    <li class="crumb"><a href="#">Reports</a></li>
+                </ol>
+            </nav>
+        </header>
+        
+        <div>
+            <form class="wrapper">
+                <div class="bow row">
+                    <div class='field'>
+                        <label class='a' for='fname'>First Name:</label>
+                        <input class='b' type='text' id='fname' placeholder="Ex. Philip">
+                    </div>
+                    <div class='field'>
+                        <label class='a' for='lname'>Last Name:</label>
+                        <input class='b' type='text' id='lname' placeholder="Ex. Nguyen">
+                    </div>
+                    <div class='field'>
+                        <datalist id="genders">
+                            <option value="Male"></option>
+                            <option value="Female"></option>
+                            <option value="Nonbinary"></option>
+                            <option value="Prefer Not to Answer"></option>
+                        </datalist>
+                        <label class='a' for='gender'>Gender:</label>
+                        <input class='b' list='genders' id='gender' >
+                    </div>
+                    <div class='field'>
+                        <label class='a' for='userId'>Age:</label>
+                        <input class='b' type='number' id='userId' placeholder="Ex. 21">
+                    </div class='field'>
+                    <div class='field'>
+                        <label class='a' for='notes'>Notes/Other Details:</label>
+                        <input class='b' type='text' id='notes' placeholder="Ex. Conditions">
+                    </div>
+                    <div class='field'>
+                        <img>
+                        
+                    </div>
+                    <button onclick="">Save</button>
+                </div>
+                
+            </form>
+        </div>
+    </body>
+</html>
