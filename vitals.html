@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Health Camp SPA</h1>
+        <nav class="topnav">
+            <ul>
+                <a href="#">Reports</a>
+                <a class="active" href="vitals.html">Health Vitals</a> 
+                <a href="index.html">Demographics</a> 
+            </ul>
+        </nav>
+        
+        <div>
+            <form class="wrapper">
+                <div class="bow row">
+                    <aside>
+                        <label for="medications">Medications:</label><br>
+                        <textarea id="medications" rows="4"></textarea><br>
+                        <label for="notes">Notes:</label><br>
+                        <textarea id="notes" rows="4"></textarea>
+                    </aside>
+
+                    <div class='field'>
+                        <label class='a' for='height'>Height:</label>
+                        <input class='b' type='number' id='height' placeholder="Ex. Philip">
+                    </div>
+                    <div class='field'>
+                        <label class='a' for='weight'>Weight:</label>
+                        <input class='b' type='text' id='weight' placeholder="Ex. Nguyen">
+                    </div>
+                    <div class='field'>
+                        <label class='a' for='bTemp'>Body Temperature:</label>
+                        <input class='b' type='number' id='bTemp' placeholder="Ex. Philip">
+                    </div>
+                    <div class='field'>
+                        <label class='a' for='pulse'>Pulse Rate:</label>
+                        <input class='b' type='number' id='pulse' placeholder="Ex. Philip">
+                    </div>
+                    <div class='field'>
+                        <label class='a' for='bp'>BP:</label>
+                        <input class='b' type='number' id='bp' placeholder="Ex. Philip">
+                    </div>
+                    
+                    
+                    <button onclick="">Save</button>
+                </div>
+                
+            </form>
+        </div>
+    </body>
+</html>

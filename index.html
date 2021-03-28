@@ -2,22 +2,51 @@
 <html>
     <head>
         <link rel="stylesheet" href="style.css">
+        <script src="index.js"></script>
     </head>
     <body>
-        <header>
-            <h1>Health Camp SPA</h1>
-            <nav>
-                <ol>
-                    <li class="crumb"><a href="#">Demographics</a></li>
-                    <li class="crumb"><a href="#">Health Vitals</a></li>
-                    <li class="crumb"><a href="#">Reports</a></li>
-                </ol>
-            </nav>
-        </header>
+        <h1>Health Camp SPA</h1>
+        <nav class="topnav">
+            <ul>
+                <a href="#">Reports</a>
+                <a href="vitals.html">Health Vitals</a> 
+                <a class="active" href="/">Demographics</a> 
+            </ul>
+        </nav>
         
         <div>
-            <form class="wrapper">
+            <form class="wrapper" id="demographics">
                 <div class="bow row">
+                    <aside>
+                        <label for="photo">Photo:</label>
+                        <button id="capture">Capture</button>
+                        <canvas id="canvas" width=320 height=240></canvas>
+                        <script>
+                            const canvas = document.getElementById('canvas');
+                            const context = canvas.getContext('2d');
+                            const captureButton = document.getElementById('capture');
+
+                            const constraints = {
+                                video: true,
+                            };
+
+                            captureButton.addEventListener('click', () => {
+                                // Draw the video frame to the canvas.
+                                context.drawImage(player, 0, 0, canvas.width, canvas.height);
+                                // Stop all video streams.
+                                player.srcObject.getVideoTracks().forEach(track => track.stop());
+                            });
+
+                            // Attach the video stream to the video element and autoplay.
+                            /*
+                            navigator.mediaDevices.getUserMedia(constraints)
+                                .then((stream) => {
+                                player.srcObject = stream;
+                                });
+                            */
+                        </script>
+                    </aside>
+                    
                     <div class='field'>
                         <label class='a' for='fname'>First Name:</label>
                         <input class='b' type='text' id='fname' placeholder="Ex. Philip">
@@ -37,21 +66,58 @@
                         <input class='b' list='genders' id='gender' >
                     </div>
                     <div class='field'>
-                        <label class='a' for='userId'>Age:</label>
-                        <input class='b' type='number' id='userId' placeholder="Ex. 21">
+                        <label class='a' for='age'>Age:</label>
+                        <input class='b' type='number' id='age' placeholder="Ex. 21">
                     </div class='field'>
                     <div class='field'>
-                        <label class='a' for='notes'>Notes/Other Details:</label>
-                        <input class='b' type='text' id='notes' placeholder="Ex. Conditions">
+                        <label class='a' for='other'>Notes/Other Details:</label>
+                        <input class='b' type='text' id='other' placeholder="Ex. Conditions">
                     </div>
-                    <div class='field'>
-                        <img>
-                        
-                    </div>
-                    <button onclick="">Save</button>
+                    
+                    <button onclick="saveDemographics()">Save</button>
                 </div>
                 
             </form>
+
+            <form class="wrapper" id="vitals">
+                <div class="bow row">
+                    <aside>
+                        <label for="medications">Medications:</label><br>
+                        <textarea id="medications" rows="4"></textarea><br>
+                        <label for="notes">Notes:</label><br>
+                        <textarea id="notes" rows="4"></textarea>
+                    </aside>
+
+                    <div class='field'>
+                        <label class='a' for='height'>Height:</label>
+                        <input class='b' type='number' id='height' placeholder="Ex. Philip">
+                    </div>
+                    <div class='field'>
+                        <label class='a' for='weight'>Weight:</label>
+                        <input class='b' type='text' id='weight' placeholder="Ex. Nguyen">
+                    </div>
+                    <div class='field'>
+                        <label class='a' for='bTemp'>Body Temperature:</label>
+                        <input class='b' type='number' id='bTemp' placeholder="Ex. Philip">
+                    </div>
+                    <div class='field'>
+                        <label class='a' for='pulse'>Pulse Rate:</label>
+                        <input class='b' type='number' id='pulse' placeholder="Ex. Philip">
+                    </div>
+                    <div class='field'>
+                        <label class='a' for='bp'>BP:</label>
+                        <input class='b' type='number' id='bp' placeholder="Ex. Philip">
+                    </div>
+                    
+                    
+                    <button onclick="saveVitals()">Save</button>
+                </div>
+                
+            </form>
+            <script>
+                var vitals = document.getElementById("vitals");
+                vitals.style.display = "none";
+            </script>
         </div>
     </body>
 </html>
