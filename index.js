@@ -21,18 +21,18 @@ function saveDemographics() {
     var name = fname + " " + lname;
     db.transaction(function (tx) {   
         tx.executeSql('CREATE TABLE IF NOT EXISTS Patients \
-        (id INTEGER PRIMARY KEY, name, age, gender, medications, notes, photo)');
+        (pid INTEGER PRIMARY KEY, name, age, gender, medications, notes, photo)');
         tx.executeSql('INSERT INTO Patients (name, gender, age, photo) VALUES(?, ?, ?, ?)', 
                         [name, gender, age, photo]);
         // get the most recent added ID
         console.log("HELLO ABOUT TO SELECT");
-        tx.executeSql('SELECT id FROM Patients WHERE name = '+quoteString(name)+' \
+        tx.executeSql('SELECT pid FROM Patients WHERE name = '+quoteString(name)+' \
         AND gender = '+quoteString(gender)+' AND age = '+quoteString(age),
         [],
         function(tx, results) {
-            console.log(results.rows[0].id);
+            console.log(results.rows[0].pid);
             
-            sessionStorage.setItem('curId', results.rows[0].id);
+            sessionStorage.setItem('curId', results.rows[0].pid);
         });
     });
     
@@ -61,17 +61,73 @@ function saveVitals() {
     db.transaction(function (tx) {   
         tx.executeSql('CREATE TABLE IF NOT EXISTS Patients \
         (id INTEGER PRIMARY KEY, name, age, gender, medications, notes, photo)');
-        tx.executeSql('UPDATE Patients SET medications=?, notes=? WHERE id = ?'
-                        , 
-        [meds, notes, sessionStorage.getItem('curId') ]);
+        console.log(quoteString(meds), quoteString(notes), parseInt(sessionStorage.getItem('curId')));
+        console.log("query:", 'UPDATE Patients SET medications='+quoteString(meds)+', notes='+quoteString(notes)+' WHERE pid = '+parseInt(sessionStorage.getItem('curId')));
+        tx.executeSql('UPDATE Patients SET medications='+quoteString(meds)+', notes='+quoteString(notes)+' WHERE pid = '+parseInt(sessionStorage.getItem('curId')));
+                        //, [meds, notes, parseInt(sessionStorage.getItem('curId')) ]);
         // get the most recent added ID
         
     });
 
+    var report = document.getElementById("report");
+    var vitals = document.getElementById("vitals");
+    report.style.display = "block";
+    vitals.style.display = "none";
+    showReport();
     //window.location.assign("");
 }
 // function to read from DB
+function showReport() {
 
+    var db = openDatabase('healthSpa', '1.0', 'HealthSpa DB', 2 * 1024 * 1024);
+
+    db.transaction(function (tx) { 
+        tx.executeSql('SELECT * FROM Patients', [], function (tx, results) { 
+           var len = results.rows.length, i; 
+           //msg = "<p>Found rows: " + len + "</p>"; 
+           //document.querySelector('#status').innerHTML +=  msg; 
+            var report = document.getElementById("report");
+            
+           for (i = 0; i < len; i++) { 
+              //msg = "<p><b>" + results.rows.item(i).log + "</b></p>"; 
+              //document.querySelector('#status').innerHTML +=  msg;
+               var patientRow = document.createElement("tr");
+
+               var patientDetail = document.createElement("td");
+               var detail = document.createTextNode(results.rows[i].name);
+               patientDetail.appendChild(detail);
+               patientRow.appendChild(patientDetail);
+
+               var patientDetail = document.createElement("td");
+               var detail = document.createTextNode(results.rows[i].age);
+               patientDetail.appendChild(detail);
+               patientRow.appendChild(patientDetail);
+
+               var patientDetail = document.createElement("td");
+               var detail = document.createTextNode(results.rows[i].gender);
+               patientDetail.appendChild(detail);
+               patientRow.appendChild(patientDetail);
+
+               var patientDetail = document.createElement("td");
+               var detail = document.createTextNode(results.rows[i].photo);
+               patientDetail.appendChild(detail);
+               patientRow.appendChild(patientDetail);
+
+               var patientDetail = document.createElement("td");
+               var detail = document.createTextNode(results.rows[i].medications);
+               patientDetail.appendChild(detail);
+               patientRow.appendChild(patientDetail);
+
+               var patientDetail = document.createElement("td");
+               var detail = document.createTextNode(results.rows[i].notes);
+               patientDetail.appendChild(detail);
+               patientRow.appendChild(patientDetail);
+
+               report.appendChild(patientRow);
+           } 
+        }, null); 
+     }); 
+}
 // function to access camera and take picture???
 
 function quoteString(string) {

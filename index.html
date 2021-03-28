@@ -19,9 +19,11 @@
                 <div class="bow row">
                     <aside>
                         <label for="photo">Photo:</label>
-                        <button id="capture">Capture</button>
-                        <canvas id="canvas" width=320 height=240></canvas>
+                        <input type="file" id="photo">
+                        <!-- <button id="capture">Capture</button> -->
+                        <!-- <canvas id="canvas" width=320 height=240></canvas> -->
                         <script>
+                            /*
                             const canvas = document.getElementById('canvas');
                             const context = canvas.getContext('2d');
                             const captureButton = document.getElementById('capture');
@@ -38,7 +40,7 @@
                             });
 
                             // Attach the video stream to the video element and autoplay.
-                            /*
+                            
                             navigator.mediaDevices.getUserMedia(constraints)
                                 .then((stream) => {
                                 player.srcObject = stream;
@@ -90,23 +92,23 @@
 
                     <div class='field'>
                         <label class='a' for='height'>Height:</label>
-                        <input class='b' type='number' id='height' placeholder="Ex. Philip">
+                        <input class='b' type='number' id='height' placeholder="in cm">
                     </div>
                     <div class='field'>
                         <label class='a' for='weight'>Weight:</label>
-                        <input class='b' type='text' id='weight' placeholder="Ex. Nguyen">
+                        <input class='b' type='text' id='weight' placeholder="in kg">
                     </div>
                     <div class='field'>
                         <label class='a' for='bTemp'>Body Temperature:</label>
-                        <input class='b' type='number' id='bTemp' placeholder="Ex. Philip">
+                        <input class='b' type='number' id='bTemp' placeholder="in Celsius">
                     </div>
                     <div class='field'>
                         <label class='a' for='pulse'>Pulse Rate:</label>
-                        <input class='b' type='number' id='pulse' placeholder="Ex. Philip">
+                        <input class='b' type='number' id='pulse' placeholder="bpm">
                     </div>
                     <div class='field'>
                         <label class='a' for='bp'>BP:</label>
-                        <input class='b' type='number' id='bp' placeholder="Ex. Philip">
+                        <input class='b' type='number' id='bp' placeholder="">
                     </div>
                     
                     
@@ -117,6 +119,23 @@
             <script>
                 var vitals = document.getElementById("vitals");
                 vitals.style.display = "none";
+            </script>
+            <table id="report">
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Photo</th>
+                    <th>Medications</th>
+                    <th>Notes</th>
+                </tr>
+            </table>
+            <script>
+                // make things non visible
+                var vitals = document.getElementById("vitals");
+                vitals.style.display = "none";
+                var report = document.getElementById("report");
+                report.style.display = "none";
             </script>
         </div>
     </body>
